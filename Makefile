@@ -1,7 +1,7 @@
 .PHONY : calc tests format static_check build_prod build_dev
 
 calc : build_prod
-	docker run --rm --name retail_calc_calc retail_calc_prod calc
+	docker run --rm --name retail_calc_calc retail_calc_prod calc --quantity=${QUANTITY} --unit_cost=${UNITY_COST} --state=${STATE}
 
 tests : build_dev
 	docker run --rm --name retail_calc_test retail_calc_dev tests

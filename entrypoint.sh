@@ -1,27 +1,29 @@
 #!/usr/bin/env sh
 
+firstarg=$1
+shift;
 
 cd ./retail_calc/src
 
-if [ "$1" = "tests" ]
+if [ "$firstarg" = "tests" ]
 then
   echo "run tests"
-  python -m unittest discover -s ../tests
+  python -m unittest discover -s ../tests "$@"
 fi
 
-if [ "$1" = "calc" ]
+if [ "$firstarg" = "calc" ]
 then
   echo "run calc"
-  python -m calc.main
+  python -m calc.main "$@"
 fi
 
-if [ "$1" = "format" ]
+if [ "$firstarg" = "format" ]
 then
   echo "run format"
-  black .
+  black . "$@"
 fi
 
-if [ "$1" = "static_check" ]
+if [ "$firstarg" = "static_check" ]
 then
   echo "run static check of code"
   echo "run black"
