@@ -20,6 +20,6 @@ def total_price(quantity: int, unit_cost: Decimal, state_code: str) -> TotalPric
 
 
 def price_without_tax(quantity: int, unit_cost: Decimal) -> Decimal:
-    total = quantity * unit_cost
-    discount_factor = get_discount_factor(total)
-    return total * (Decimal("1.00") - discount_factor)
+    price = quantity * unit_cost
+    discount_factor = get_discount_factor(price)
+    return price * (Decimal("1.00") - discount_factor)
