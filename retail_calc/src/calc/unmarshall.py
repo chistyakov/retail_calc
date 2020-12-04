@@ -3,19 +3,20 @@ from argparse import Namespace
 from decimal import Decimal
 
 from calc.convert import str_to_decimal
-from calc.tax import TAX_FACTOR_PER_STATE
+from calc.tax import TAX_FACTOR_PER_STATE_CODE
 
 
 def unmarshall_command_line_args() -> Namespace:
     parser = argparse.ArgumentParser(description="Retail calculator.")
-    parser.add_argument("--quantity", type=int, help="Quantity of units")
+    parser.add_argument("--quantity", type=int, help="Quantity of goods")
+    parser.add_argument("--cost", type=unmarshall_decimal, help="Cost of good (USD)")
     parser.add_argument(
-        "--unit_cost", type=unmarshall_decimal, help="Cost of unit (USD)"
+        "--state_code",
+        type=str,
+        help="State code",
+        choices=list(TAX_FACTOR_PER_STATE_CODE),
     )
-    parser.add_argument(
-        "--state", type=str, help="State", choices=list(TAX_FACTOR_PER_STATE)
-    )
-    parser.add_argument("--verbose", type=bool, help="Verbose", default=False)
+    parser.add_argument("--verbose", help="Verbose", default=False, action="store_true")
     args = parser.parse_args()
     return args
 

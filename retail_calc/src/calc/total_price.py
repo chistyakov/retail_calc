@@ -12,9 +12,9 @@ class TotalPrice:
     price_without_tax: Decimal
 
 
-def total_price(quantity: int, unit_cost: Decimal, state: str) -> TotalPrice:
-    tax_factor = get_tax_factor(state)
+def total_price(quantity: int, unit_cost: Decimal, state_code: str) -> TotalPrice:
     without_tax = price_without_tax(quantity, unit_cost)
+    tax_factor = get_tax_factor(state_code)
     price = without_tax * (Decimal("1.00") + tax_factor)
     return TotalPrice(price=price, price_without_tax=without_tax)
 

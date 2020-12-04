@@ -13,8 +13,8 @@ def main():
     args = unmarshall_command_line_args()
     total = total_price(
         quantity=args.quantity,
-        unit_cost=args.unit_cost,
-        state=args.state,
+        unit_cost=args.cost,
+        state_code=args.state_code,
     )
     logger.info(marshall_total_price(total=total, verbose=args.verbose))
 

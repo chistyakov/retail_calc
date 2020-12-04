@@ -44,7 +44,8 @@ For code stability control, write Unit tests
 
 ## How to run
 ```shell
-make calc QUANTITY=10000 UNITY_COST=2.00 STATE=AL VERBOSE=true
+make calc quantity=10000 cost=2 state_code=AL verbose=true
+make calc quantity=10000 cost=2 state_code=AL
 
 # run tests:
 make tests

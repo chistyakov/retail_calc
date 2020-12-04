@@ -1,7 +1,11 @@
 .PHONY : calc tests format static_check build_prod build_dev
 
+verbose_arg :=
+ifdef verbose
+	verbose_arg := --verbose
+endif
 calc : build_prod
-	docker run --rm --name retail_calc_calc retail_calc_prod calc --quantity=${QUANTITY} --unit_cost=${UNITY_COST} --state=${STATE} --verbose=${VERBOSE}
+	docker run --rm --name retail_calc_calc retail_calc_prod calc --quantity=${quantity} --cost=${cost} --state_code=${state_code} ${verbose_arg}
 
 tests : build_dev
 	docker run --rm --name retail_calc_test retail_calc_dev tests

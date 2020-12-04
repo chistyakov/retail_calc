@@ -16,8 +16,8 @@ class TestTax(unittest.TestCase):
             ("CA", Decimal("0.0825")),
         ]
     )
-    def test_tax_factor(self, input_state, expected_tax_factor):
-        self.assertEqual(get_tax_factor(input_state), expected_tax_factor)
+    def test_tax_factor(self, input_state_code, expected_tax_factor):
+        self.assertEqual(get_tax_factor(input_state_code), expected_tax_factor)
 
     def test_tax_factor_invalid(self):
         with self.assertRaises(ValueError):

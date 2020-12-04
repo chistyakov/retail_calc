@@ -13,7 +13,6 @@ fi
 
 if [ "$firstarg" = "calc" ]
 then
-  echo "run calc"
   python -m calc.main "$@"
 fi
 

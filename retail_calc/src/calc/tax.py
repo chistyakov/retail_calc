@@ -1,6 +1,6 @@
 from decimal import Decimal
 
-TAX_FACTOR_PER_STATE = {
+TAX_FACTOR_PER_STATE_CODE = {
     "UT": Decimal("0.0685"),
     "NV": Decimal("0.08"),
     "TX": Decimal("0.0625"),
@@ -9,8 +9,10 @@ TAX_FACTOR_PER_STATE = {
 }
 
 
-def get_tax_factor(state: str) -> Decimal:
+def get_tax_factor(state_code: str) -> Decimal:
     try:
-        return TAX_FACTOR_PER_STATE[state]
+        return TAX_FACTOR_PER_STATE_CODE[state_code]
     except KeyError:
-        raise ValueError(f"Supported states: {list(TAX_FACTOR_PER_STATE)}")
+        raise ValueError(
+            f"Unsupported state code. Options: {list(TAX_FACTOR_PER_STATE_CODE)}"
+        )
