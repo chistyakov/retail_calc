@@ -8,8 +8,12 @@ from calc.tax import TAX_FACTOR_PER_STATE_CODE
 
 def unmarshall_command_line_args() -> Namespace:
     parser = argparse.ArgumentParser(description="Retail calculator.")
-    parser.add_argument("--quantity", type=int, help="Quantity of goods")
-    parser.add_argument("--cost", type=unmarshall_decimal, help="Cost of good (USD)")
+    parser.add_argument(
+        "--quantity", type=unmarshall_positive_int, help="Quantity of goods"
+    )
+    parser.add_argument(
+        "--cost", type=unmarshall_not_negative_decimal, help="Cost of good (USD)"
+    )
     parser.add_argument(
         "--state_code",
         type=str,
@@ -21,8 +25,25 @@ def unmarshall_command_line_args() -> Namespace:
     return args
 
 
-def unmarshall_decimal(arg: str) -> Decimal:
+def unmarshall_positive_int(arg: str) -> int:
     try:
-        return str_to_decimal(arg)
+        value = int(arg)
+    except ValueError:
+        raise argparse.ArgumentTypeError(f"{arg} is not valid int")
+
+    if value <= 0:
+        raise argparse.ArgumentTypeError(f"{arg} is not positive")
+
+    return value
+
+
+def unmarshall_not_negative_decimal(arg: str) -> Decimal:
+    try:
+        value = str_to_decimal(arg)
     except ValueError:
         raise argparse.ArgumentTypeError(f"{arg} is not valid decimal")
+
+    if value < 0:
+        raise argparse.ArgumentTypeError(f"{arg} is not not negative")
+
+    return value
